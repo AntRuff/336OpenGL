@@ -102,5 +102,11 @@
     <Image Include="..\..\..\Downloads\GrandpaOwens.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
+    <Image Include="car.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Besh.jpg">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>
