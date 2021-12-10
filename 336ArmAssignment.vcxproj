@@ -158,6 +158,8 @@
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="cube.frag" />
+    <None Include="cube.vert" />
     <None Include="cylinderShader.cbp" />
     <None Include="default.frag" />
     <None Include="default.vert" />
@@ -178,6 +180,7 @@
     <Image Include="..\..\..\Downloads\GrandpaOwens.png" />
     <Image Include="Besh.jpg" />
     <Image Include="car.png" />
+    <Image Include="whiteSquare.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

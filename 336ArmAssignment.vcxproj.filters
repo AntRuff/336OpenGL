@@ -71,6 +71,12 @@
     <None Include="light.vert">
       <Filter>Resource Files\Shaders</Filter>
     </None>
+    <None Include="cube.frag">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="cube.vert">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="shaderClass.h">
@@ -106,6 +112,9 @@
       <Filter>Resource Files\Textures</Filter>
     </Image>
     <Image Include="Besh.jpg">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="whiteSquare.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
   </ItemGroup>

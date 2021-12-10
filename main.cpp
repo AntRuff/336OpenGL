@@ -26,7 +26,7 @@ glm::vec3 upperPos = glm::vec3(5.0f, 5.0f, 5.0f);
 glm::vec3 forearmPos = glm::vec3(2.5f, 2.5f, 2.5f);
 glm::vec3 handPos = glm::vec3(1.25f, 1.25f, 1.25f);
 
-// Vertices coordinates
+// Top Vertices coordinates
 GLfloat vertices[] =
 { //     COORDINATES     /        COLORS          /    TexCoord   /        NORMALS       //
 	-1.0f, 0.0f,  1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, 1.0f, 0.0f,
@@ -40,6 +40,19 @@ GLuint indices[] =
 {
 	0, 1, 2, // Bottom
 	0, 2, 3 // Bottom
+};
+
+GLfloat frontVertices[] =
+{ //     COORDINATES     /        COLORS          /    TexCoord   /        NORMALS       //
+	-1.0f, 0.0f, 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, 0.0f, 1.0f,
+	-1.0f, 1.0f, 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, 0.0f, 1.0f,
+	 1.0f, 1.0f, 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 0.0f, 1.0f,
+	 1.0f, 0.0f, 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 0.0f, 1.0f
+};
+
+GLuint frontIndices[] = {
+	0, 1, 2,
+	0, 2, 3
 };
 
 GLfloat lightVertices[] = {
@@ -99,6 +112,8 @@ int main() {
 	//Creates the shader program for rendering
 	Shader shaderProgram("default.vert", "default.frag");
 
+	Shader cubeShader("cube.vert", "cube.vert");
+
 	//Cylinder shoulder = Cylinder(shoulderPos.x, shoulderPos.y, shoulderPos.z, 36, 8, true);
 
 	//Creates and Binds the Vertex Array
@@ -126,6 +141,26 @@ int main() {
 	VBO1.Unbind();
 	EBO1.Unbind();
 
+	VAO VAO2;
+	VAO2.Bind();
+
+	//Creates and Binds Vertex Buffer and Element Buffers
+	VBO VBO2(frontVertices, sizeof(frontVertices));
+	EBO EBO2(frontIndices, sizeof(frontIndices));
+
+	VBO2.Bind();
+	EBO2.Bind();
+
+	VAO2.LinkAttrib(VBO1, 0, 3, GL_FLOAT, stride, (void*)0);
+	VAO2.LinkAttrib(VBO1, 1, 3, GL_FLOAT, stride, (void*)(3 * sizeof(float)));
+	VAO2.LinkAttrib(VBO1, 2, 2, GL_FLOAT, stride, (void*)(6 * sizeof(float)));
+	VAO2.LinkAttrib(VBO1, 3, 3, GL_FLOAT, stride, (void*)(8 * sizeof(float)));
+
+	//Unbinds everything
+	VAO2.Unbind();
+	VBO2.Unbind();
+	EBO2.Unbind();
+
 	Shader lightShader("light.vert", "light.frag");
 
 	VAO lightVAO;
@@ -140,7 +175,7 @@ int main() {
 	lightVBO.Unbind();
 	lightEBO.Unbind();
 
-	glm::vec4 lightColor = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
 	glm::vec3 lightPos = glm::vec3(0.5f, 0.5f, 0.5f);
 	glm::mat4 lightModel = glm::mat4(1.0f);
@@ -150,6 +185,8 @@ int main() {
 	glm::mat4 pyramidModel = glm::mat4(1.0f);
 	pyramidModel = glm::translate(pyramidModel, pyramidPos);
 
+	glm::mat4 cybeView 
+
 	lightShader.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel));
 	glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
@@ -157,10 +194,44 @@ int main() {
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(pyramidModel));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+	cubeShader.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(cubeShader.ID, "projection"), 1, GL_FALSE, glm::value_ptr)
 
-
-	Texture testTexture("GrandpaOwens.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture testTexture("GrandpaOwens.png", GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, GL_LINEAR, GL_LINEAR_MIPMAP_LINEAR);
 	testTexture.texUnit(shaderProgram, "tex0", 0);
+
+	GLuint cubeID;
+	glGenTextures(2, &cubeID);
+	glBindTexture(GL_TEXTURE_CUBE_MAP, cubeID);
+
+	std::string texturesFiles[6] = {"GrandpaOwens.png", "Besh.jpg", "car.png", "whiteSquare.png", "whiteSquare.png", "whiteSquare.png"};
+
+	int width, height, nrChannels;
+	unsigned char* data;
+
+	data = stbi_load(texturesFiles[0].c_str(), &width, &height, &nrChannels, 0);
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+	data = stbi_load(texturesFiles[1].c_str(), &width, &height, &nrChannels, 0);
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+	data = stbi_load(texturesFiles[2].c_str(), &width, &height, &nrChannels, 0);
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+	data = stbi_load(texturesFiles[3].c_str(), &width, &height, &nrChannels, 0);
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGB, width, height, 0, GL_RED, GL_UNSIGNED_BYTE, data);
+
+	data = stbi_load(texturesFiles[4].c_str(), &width, &height, &nrChannels, 0);
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGB, width, height, 0, GL_BLUE, GL_UNSIGNED_BYTE, data);
+
+	data = stbi_load(texturesFiles[5].c_str(), &width, &height, &nrChannels, 0);
+	glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGB, width, height, 0, GL_GREEN, GL_UNSIGNED_BYTE, data);
+
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
 
 	glfwSwapBuffers(window);
@@ -189,6 +260,9 @@ int main() {
 		
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
 
+		VAO2.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(frontIndices) / sizeof(int), GL_UNSIGNED_INT, (void*)0);
+
 		lightShader.Activate();
 		camera.Matrix(lightShader, "camMatrix");
 		lightVAO.Bind();
@@ -205,6 +279,9 @@ int main() {
 	VAO1.Delete();
 	VBO1.Delete();
 	EBO1.Delete();
+	VAO2.Delete();
+	VBO2.Delete();
+	EBO2.Delete();
 	testTexture.Delete();
 	shaderProgram.Delete();
 

@@ -1,6 +1,6 @@
 #include"Texture.h"
 
-Texture::Texture(const char* image, GLenum texType, GLuint slot, GLenum format, GLenum pixelType)
+Texture::Texture(const char* image, GLenum texType, GLuint slot, GLenum format, GLenum pixelType, GLenum magType, GLenum minType)
 {
 	// Assigns the type of the texture ot the texture object
 	type = texType;
@@ -20,8 +20,9 @@ Texture::Texture(const char* image, GLenum texType, GLuint slot, GLenum format, 
 	glBindTexture(texType, ID);
 
 	// Configures the type of algorithm that is used to make the image smaller or bigger
-	glTexParameteri(texType, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(texType, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(texType, GL_TEXTURE_MIN_FILTER, minType);
+	glTexParameteri(texType, GL_TEXTURE_MAG_FILTER, magType);
+	
 
 	// Configures the way the texture repeats (if it does at all)
 	glTexParameteri(texType, GL_TEXTURE_WRAP_S, GL_REPEAT);
