@@ -140,7 +140,7 @@ int main() {
 	lightVBO.Unbind();
 	lightEBO.Unbind();
 
-	glm::vec4 lightColor = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
 	glm::vec3 lightPos = glm::vec3(0.5f, 0.5f, 0.5f);
 	glm::mat4 lightModel = glm::mat4(1.0f);
@@ -179,9 +179,13 @@ int main() {
 		camera.Inputs(window);
 
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
+
+		lightPos = camera.Position;
+		lightModel = translate(lightModel, lightPos);
 		//Use the shader to draw a triangle
 		shaderProgram.Activate();
 		glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+		glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 		camera.Matrix(shaderProgram, "camMatrix");
 
 		testTexture.Bind();
@@ -190,6 +194,9 @@ int main() {
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
 
 		lightShader.Activate();
+		
+		glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel));
+
 		camera.Matrix(lightShader, "camMatrix");
 		lightVAO.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, (void*)0);
