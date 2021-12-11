@@ -31,8 +31,9 @@ void Camera::Matrix(Shader& shader, const char* uniform) {
 
 void Camera::Inputs(GLFWwindow* window)
 {
+	float rot = .25f;
 	// Handles key inputs
-	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	/*if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 	{
 		Position += speed * Orientation;
 	}
@@ -111,5 +112,48 @@ void Camera::Inputs(GLFWwindow* window)
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		// Makes sure the next time the camera looks around it doesn't jump
 		firstClick = true;
+	}*/
+
+	if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
+		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) {
+			Position += speed * -glm::normalize(glm::cross(Orientation, Up));
+		}
+		else {
+			Position += speed * glm::normalize(glm::cross(Orientation, Up));
+		}
 	}
+	if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS) {
+		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) {
+			Position += speed * -Up;
+		}
+		else {
+			Position += speed * Up;
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
+		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) {
+			Position += speed * -Orientation;
+		}
+		else {
+			Position += speed * Orientation;
+		}
+	}
+
+	if (glfwGetKey(window, GLFW_KEY_V) == GLFW_PRESS) {
+		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) {
+			lightOffset += speed * glm::normalize(glm::cross(Orientation, Up));
+		}
+		else {
+			lightOffset += speed * -glm::normalize(glm::cross(Orientation, Up));
+		}
+	}
+	if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS) {
+		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) {
+			lightOffset += speed * -Up;
+		}
+		else {
+			lightOffset += speed * Up;
+		}
+	}
+	
 }

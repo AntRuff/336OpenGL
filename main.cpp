@@ -350,9 +350,9 @@ int main() {
 	glfwSwapBuffers(window);
 	glEnable(GL_DEPTH_TEST);
 
-	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
+	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 10.0f));
 
-	
+	float rot = 1.0f;
 
 	//Keep screen open while not closed
 	while (!glfwWindowShouldClose(window)) {
@@ -364,12 +364,103 @@ int main() {
 
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
 
-		lightPos = camera.Position;
-		lightModel = translate(lightModel, lightPos);
+		
 		//Use the shader to draw a triangle
 		shaderProgram.Activate();
+		
+		
+		if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) {
+			if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) {
+				pyramidModel = glm::rotate(pyramidModel, glm::radians(rot), glm::vec3(1.0f, 0.0f, 0.0f));
+			}
+			else {
+				pyramidModel = glm::rotate(pyramidModel, glm::radians(-rot), glm::vec3(1.0f, 0.0f, 0.0f));
+			}
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS) {
+			if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) {
+				pyramidModel = glm::rotate(pyramidModel, glm::radians(rot), glm::vec3(0.0f, 1.0f, 0.0f));
+			}
+			else {
+				pyramidModel = glm::rotate(pyramidModel, glm::radians(-rot), glm::vec3(0.0f, 1.0f, 0.0f));
+			}
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS) {
+			if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) {
+				pyramidModel = glm::rotate(pyramidModel, glm::radians(rot), glm::vec3(0.0f, 0.0f, 1.0f));
+			}
+			else {
+				pyramidModel = glm::rotate(pyramidModel, glm::radians(-rot), glm::vec3(0.0f, 0.0f, 1.0f));
+			}
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS) {
+			if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) {
+				if (lightColor.x + .01f > 1.0f) {
+					lightColor.x = 1.0f;
+				}
+				else {
+					lightColor.x += .01f;
+				}
+			}
+			else {
+				if (lightColor.x - .01f < 0.0f) {
+					lightColor.x = 0.0f;
+				}
+				else {
+					lightColor.x -= .01f;
+				}
+			}
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS) {
+			if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) {
+				if (lightColor.y + .01f > 1.0f) {
+					lightColor.y = 1.0f;
+				}
+				else {
+					lightColor.y += .01f;
+				}
+			}
+			else {
+				if (lightColor.y - .01f < 0.0f) {
+					lightColor.y = 0.0f;
+				}
+				else {
+					lightColor.y -= .01f;
+				}
+			}
+		}
+
+		if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS) {
+			if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS || glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) {
+				if (lightColor.z + .01f > 1.0f) {
+					lightColor.z = 1.0f;
+				}
+				else {
+					lightColor.z += .01f;
+				}
+			}
+			else {
+				if (lightColor.z - .01f < 0.0f) {
+					lightColor.z = 0.0f;
+				}
+				else {
+					lightColor.z -= .01f;
+				}
+			}
+		}
+
+		lightPos = camera.Position + camera.lightOffset;
+		lightModel = translate(lightModel, lightPos);
+
+		glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(pyramidModel));
+
 		glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
 		glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+		glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightColor.x, lightColor.y, lightColor.z, lightColor.w);
 		camera.Matrix(shaderProgram, "camMatrix");
 
 		//left
