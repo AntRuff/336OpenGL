@@ -140,6 +140,7 @@ int main() {
 
 	//Cylinder shoulder = Cylinder(shoulderPos.x, shoulderPos.y, shoulderPos.z, 36, 8, true);
 
+//Left Square
 	//Creates and Binds the Vertex Array
 	VAO VAO1;
 	VAO1.Bind();
@@ -165,9 +166,7 @@ int main() {
 	VBO1.Unbind();
 	EBO1.Unbind();
 
-
-
-
+//Right Square
 	VAO VAO2;
 	VAO2.Bind();
 
@@ -188,9 +187,118 @@ int main() {
 	VAO2.LinkAttrib(VBO2, 3, 3, GL_FLOAT, stride, (void*)(8 * sizeof(float)));
 
 	//Unbinds everything
-	VAO1.Unbind();
-	VBO1.Unbind();
-	EBO1.Unbind();
+	VAO2.Unbind();
+	VBO2.Unbind();
+	EBO2.Unbind();
+
+
+//Top Square
+	VAO VAO3;
+	VAO3.Bind();
+
+	//Creates and Binds Vertex Buffer and Element Buffers
+	VBO VBO3( verticesTop, sizeof(verticesTop));
+	EBO EBO3( indices, sizeof(indices));
+
+	VBO3.Bind();
+	EBO3.Bind();
+
+	//int stride = shoulder.getInterleavedStride();
+	stride = 11 * sizeof(float);
+
+	//Links Vertex Buffer to Vertex Array
+	VAO3.LinkAttrib(VBO3, 0, 3, GL_FLOAT, stride, (void*)0);
+	VAO3.LinkAttrib(VBO3, 1, 3, GL_FLOAT, stride, (void*)(3 * sizeof(float)));
+	VAO3.LinkAttrib(VBO3, 2, 2, GL_FLOAT, stride, (void*)(6 * sizeof(float)));
+	VAO3.LinkAttrib(VBO3, 3, 3, GL_FLOAT, stride, (void*)(8 * sizeof(float)));
+
+	//Unbinds everything
+	VAO3.Unbind();
+	VBO3.Unbind();
+	EBO3.Unbind();
+
+
+//Bottom Square
+	VAO VAO4;
+	VAO4.Bind();
+
+	//Creates and Binds Vertex Buffer and Element Buffers
+	VBO VBO4( verticesBottom, sizeof(verticesBottom));
+	EBO EBO4( indices, sizeof(indices));
+
+	VBO4.Bind();
+	EBO4.Bind();
+
+	//int stride = shoulder.getInterleavedStride();
+	stride = 11 * sizeof(float);
+
+	//Links Vertex Buffer to Vertex Array
+	VAO4.LinkAttrib(VBO4, 0, 3, GL_FLOAT, stride, (void*)0);
+	VAO4.LinkAttrib(VBO4, 1, 3, GL_FLOAT, stride, (void*)(3 * sizeof(float)));
+	VAO4.LinkAttrib(VBO4, 2, 2, GL_FLOAT, stride, (void*)(6 * sizeof(float)));
+	VAO4.LinkAttrib(VBO4, 3, 3, GL_FLOAT, stride, (void*)(8 * sizeof(float)));
+
+	//Unbinds everything
+	VAO4.Unbind();
+	VBO4.Unbind();
+	EBO4.Unbind();
+
+
+//Front Square
+	VAO VAO5;
+	VAO5.Bind();
+
+	//Creates and Binds Vertex Buffer and Element Buffers
+	VBO VBO5( verticesFront, sizeof(verticesFront));
+	EBO EBO5( indices, sizeof(indices));
+
+	VBO5.Bind();
+	EBO5.Bind();
+
+	//int stride = shoulder.getInterleavedStride();
+	stride = 11 * sizeof(float);
+
+	//Links Vertex Buffer to Vertex Array
+	VAO5.LinkAttrib(VBO5, 0, 3, GL_FLOAT, stride, (void*)0);
+	VAO5.LinkAttrib(VBO5, 1, 3, GL_FLOAT, stride, (void*)(3 * sizeof(float)));
+	VAO5.LinkAttrib(VBO5, 2, 2, GL_FLOAT, stride, (void*)(6 * sizeof(float)));
+	VAO5.LinkAttrib(VBO5, 3, 3, GL_FLOAT, stride, (void*)(8 * sizeof(float)));
+
+	//Unbinds everything
+	VAO5.Unbind();
+	VBO5.Unbind();
+	EBO5.Unbind();
+
+
+//Back Square
+	VAO VAO6;
+	VAO6.Bind();
+
+	//Creates and Binds Vertex Buffer and Element Buffers
+	VBO VBO6( verticesBack, sizeof(verticesBack));
+	EBO EBO6( indices, sizeof(indices));
+
+	VBO6.Bind();
+	EBO6.Bind();
+
+	//int stride = shoulder.getInterleavedStride();
+	stride = 11 * sizeof(float);
+
+	//Links Vertex Buffer to Vertex Array
+	VAO6.LinkAttrib(VBO6, 0, 3, GL_FLOAT, stride, (void*)0);
+	VAO6.LinkAttrib(VBO6, 1, 3, GL_FLOAT, stride, (void*)(3 * sizeof(float)));
+	VAO6.LinkAttrib(VBO6, 2, 2, GL_FLOAT, stride, (void*)(6 * sizeof(float)));
+	VAO6.LinkAttrib(VBO6, 3, 3, GL_FLOAT, stride, (void*)(8 * sizeof(float)));
+
+	//Unbinds everything
+	VAO6.Unbind();
+	VBO6.Unbind();
+	EBO6.Unbind();
+
+
+
+
+
 
 	Shader lightShader("light.vert", "light.frag");
 
@@ -251,8 +359,19 @@ int main() {
 		camera.Matrix(shaderProgram, "camMatrix");
 
 		testTexture.Bind();
-		VAO1.Bind();
 		
+		VAO1.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
+
+		VAO2.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
+		VAO3.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
+		VAO4.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
+		VAO5.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
+		VAO6.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
 
 		lightShader.Activate();
