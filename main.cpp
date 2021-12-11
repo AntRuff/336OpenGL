@@ -26,20 +26,59 @@ glm::vec3 upperPos = glm::vec3(5.0f, 5.0f, 5.0f);
 glm::vec3 forearmPos = glm::vec3(2.5f, 2.5f, 2.5f);
 glm::vec3 handPos = glm::vec3(1.25f, 1.25f, 1.25f);
 
+GLfloat cubeX = 0.0f;
+GLfloat cubeY = 0.0f;
+GLfloat cubeZ = 0.0f;
 // Vertices coordinates
-GLfloat vertices[] =
-{ //     COORDINATES     /        COLORS          /    TexCoord   /        NORMALS       //
-	-1.0f, 0.0f,  1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, 1.0f, 0.0f,
-	-1.0f, 0.0f, -1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, 1.0f, 0.0f,
-	 1.0f, 0.0f, -1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 1.0f, 0.0f,
-	 1.0f, 0.0f,  1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 1.0f, 0.0f
+GLfloat verticesLeft[] =
+{ //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
+	cubeX - 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		-1.0f, 0.0f, 0.0f, //0
+	cubeX - 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		-1.0f, 0.0f, 0.0f, //1
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		-1.0f, 0.0f, 0.0f, //2
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		-1.0f, 0.0f, 0.0f  //3
 };
+GLfloat verticesRight[] = //right
+{ //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
+	cubeX + 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		1.0f, 0.0f, 0.0f, //4
+	cubeX + 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f, 0.0f, //5
+	cubeX + 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		1.0f, 0.0f, 0.0f, //6
+	cubeX + 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		1.0f, 0.0f, 0.0f  //7
+};
+GLfloat verticesTop[] =
+{ //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 1.0f, 0.0f, //2
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 1.0f, 0.0f, //3
+	cubeX + 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 1.0f, 0.0f, //6
+	cubeX + 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 1.0f, 0.0f  //7
+};
+GLfloat verticesBottom[] =
+{ //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
+	cubeX - 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, -1.0f, 0.0f, //0
+	cubeX - 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, -1.0f, 0.0f, //1
+	cubeX + 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, -1.0f, 0.0f, //4
+	cubeX + 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, -1.0f, 0.0f  //5
+};
+GLfloat verticesFront[] =
+{ //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
+	cubeX - 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, 0.0f, -1.0f, //0
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 0.0f, -1.0f, //2
+	cubeX + 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, 0.0f, -1.0f, //4
+	cubeX + 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 0.0f, -1.0f  //6
+};
+GLfloat verticesBack[] =
+{ //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
+	cubeX - 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, 0.0f, 1.0f, //1
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 0.0f, 1.0f, //3
+	cubeX + 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, 0.0f, 1.0f, //5
+	cubeX + 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 0.0f, 1.0f  //7
+};
+
 
 // Indices for vertices order
 GLuint indices[] =
 {
 	0, 1, 2, // Bottom
-	0, 2, 3 // Bottom
+	1, 2, 3 // Bottom
 };
 
 GLfloat lightVertices[] = {
@@ -106,7 +145,7 @@ int main() {
 	VAO1.Bind();
 
 	//Creates and Binds Vertex Buffer and Element Buffers
-	VBO VBO1( vertices, sizeof(vertices));
+	VBO VBO1( verticesLeft, sizeof(verticesLeft));
 	EBO EBO1( indices, sizeof(indices));
 
 	VBO1.Bind();
@@ -120,6 +159,33 @@ int main() {
 	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, stride, (void*)(3 * sizeof(float)));
 	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, stride, (void*)(6 * sizeof(float)));
 	VAO1.LinkAttrib(VBO1, 3, 3, GL_FLOAT, stride, (void*)(8 * sizeof(float)));
+
+	//Unbinds everything
+	VAO1.Unbind();
+	VBO1.Unbind();
+	EBO1.Unbind();
+
+
+
+
+	VAO VAO2;
+	VAO2.Bind();
+
+	//Creates and Binds Vertex Buffer and Element Buffers
+	VBO VBO2( verticesRight, sizeof(verticesRight));
+	EBO EBO2( indices, sizeof(indices));
+
+	VBO2.Bind();
+	EBO2.Bind();
+
+	//int stride = shoulder.getInterleavedStride();
+	stride = 11 * sizeof(float);
+
+	//Links Vertex Buffer to Vertex Array
+	VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, stride, (void*)0);
+	VAO2.LinkAttrib(VBO2, 1, 3, GL_FLOAT, stride, (void*)(3 * sizeof(float)));
+	VAO2.LinkAttrib(VBO2, 2, 2, GL_FLOAT, stride, (void*)(6 * sizeof(float)));
+	VAO2.LinkAttrib(VBO2, 3, 3, GL_FLOAT, stride, (void*)(8 * sizeof(float)));
 
 	//Unbinds everything
 	VAO1.Unbind();
