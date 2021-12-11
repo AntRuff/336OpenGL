@@ -33,43 +33,43 @@ GLfloat cubeZ = 0.0f;
 GLfloat verticesLeft[] =
 { //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
 	cubeX - 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		-1.0f, 0.0f, 0.0f, //0
-	cubeX - 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		-1.0f, 0.0f, 0.0f, //1
-	cubeX - 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		-1.0f, 0.0f, 0.0f, //2
-	cubeX - 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		-1.0f, 0.0f, 0.0f  //3
+	cubeX - 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		-1.0f, 0.0f, 0.0f, //1
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		-1.0f, 0.0f, 0.0f, //2
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		-1.0f, 0.0f, 0.0f  //3
 };
-GLfloat verticesRight[] = //right
+GLfloat verticesRight[] =
 { //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
 	cubeX + 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		1.0f, 0.0f, 0.0f, //4
-	cubeX + 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f, 0.0f, //5
-	cubeX + 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		1.0f, 0.0f, 0.0f, //6
-	cubeX + 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		1.0f, 0.0f, 0.0f  //7
+	cubeX + 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		1.0f, 0.0f, 0.0f, //5
+	cubeX + 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		1.0f, 0.0f, 0.0f, //6
+	cubeX + 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		1.0f, 0.0f, 0.0f  //7
 };
 GLfloat verticesTop[] =
 { //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
-	cubeX - 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 1.0f, 0.0f, //2
-	cubeX - 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 1.0f, 0.0f, //3
-	cubeX + 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 1.0f, 0.0f, //6
-	cubeX + 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 1.0f, 0.0f  //7
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, 1.0f, 0.0f, //2
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, 1.0f, 0.0f, //3
+	cubeX + 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 1.0f, 0.0f, //6
+	cubeX + 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 1.0f, 0.0f  //7
 };
 GLfloat verticesBottom[] =
 { //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
-	cubeX - 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, -1.0f, 0.0f, //0
-	cubeX - 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, -1.0f, 0.0f, //1
+	cubeX - 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, -1.0f, 0.0f, //0
+	cubeX - 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, -1.0f, 0.0f, //1
 	cubeX + 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, -1.0f, 0.0f, //4
 	cubeX + 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, -1.0f, 0.0f  //5
 };
 GLfloat verticesFront[] =
 { //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
 	cubeX - 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, 0.0f, -1.0f, //0
-	cubeX - 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 0.0f, -1.0f, //2
-	cubeX + 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, 0.0f, -1.0f, //4
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, 0.0f, -1.0f, //2
+	cubeX + 1.0f, cubeY - 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 0.0f, -1.0f, //4
 	cubeX + 1.0f, cubeY + 1.0f,  cubeZ - 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 0.0f, -1.0f  //6
 };
 GLfloat verticesBack[] =
 { //     COORDINATES								/        COLORS          /    TexCoord   /        NORMALS       //
-	cubeX - 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, 0.0f, 1.0f, //1
-	cubeX - 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 0.0f, 1.0f, //3
-	cubeX + 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 1.0f,		0.0f, 0.0f, 1.0f, //5
+	cubeX - 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 0.0f, 1.0f, //1
+	cubeX - 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 1.0f,		0.0f, 0.0f, 1.0f, //3
+	cubeX + 1.0f, cubeY - 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		0.0f, 0.0f,		0.0f, 0.0f, 1.0f, //5
 	cubeX + 1.0f, cubeY + 1.0f,  cubeZ + 1.0f,		0.0f, 0.0f, 0.0f,		1.0f, 0.0f,		0.0f, 0.0f, 1.0f  //7
 };
 
@@ -314,7 +314,7 @@ int main() {
 	lightVBO.Unbind();
 	lightEBO.Unbind();
 
-	glm::vec4 lightColor = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+	glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
 	glm::vec3 lightPos = glm::vec3(0.5f, 0.5f, 0.5f);
 	glm::mat4 lightModel = glm::mat4(1.0f);
@@ -333,8 +333,18 @@ int main() {
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 
 
-	Texture testTexture("GrandpaOwens.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-	testTexture.texUnit(shaderProgram, "tex0", 0);
+	Texture textureLeft("GrandpaOwens.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture textureRight("Besh.jpg", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+	Texture textureTop("car.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	Texture textureBottom("toadnohat.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+	Texture textureFront("woodtexture.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+	Texture textureBack("stonetexture.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGB, GL_UNSIGNED_BYTE);
+	textureLeft.texUnit(shaderProgram, "tex0", 0);
+	textureRight.texUnit(shaderProgram, "tex0", 0);
+	textureTop.texUnit(shaderProgram, "tex0", 0);
+	textureBottom.texUnit(shaderProgram, "tex0", 0);
+	textureFront.texUnit(shaderProgram, "tex0", 0);
+	textureBack.texUnit(shaderProgram, "tex0", 0);
 
 
 	glfwSwapBuffers(window);
@@ -353,28 +363,50 @@ int main() {
 		camera.Inputs(window);
 
 		camera.updateMatrix(45.0f, 0.1f, 100.0f);
+
+		lightPos = camera.Position;
+		lightModel = translate(lightModel, lightPos);
 		//Use the shader to draw a triangle
 		shaderProgram.Activate();
 		glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+		glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
 		camera.Matrix(shaderProgram, "camMatrix");
 
-		testTexture.Bind();
-		
+		//left
+		textureLeft.Bind();
 		VAO1.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
-
+		textureLeft.Unbind();
+		//right
+		textureRight.Bind();
 		VAO2.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
+		textureRight.Unbind();
+		//top
+		textureTop.Bind();
 		VAO3.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
+		textureTop.Unbind();
+		//bottom
+		textureBottom.Bind();
 		VAO4.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
+		textureBottom.Unbind();
+		//front
+		textureFront.Bind();
 		VAO5.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
+		textureFront.Unbind();
+		//back
+		textureBack.Bind();
 		VAO6.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(int), GL_UNSIGNED_INT, (void*)0);
+		textureBack.Unbind();
 
 		lightShader.Activate();
+
+		glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel));
+
 		camera.Matrix(lightShader, "camMatrix");
 		lightVAO.Bind();
 		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(int), GL_UNSIGNED_INT, (void*)0);
@@ -390,7 +422,12 @@ int main() {
 	VAO1.Delete();
 	VBO1.Delete();
 	EBO1.Delete();
-	testTexture.Delete();
+	textureLeft.Delete();
+	textureRight.Delete();
+	textureTop.Delete();
+	textureBottom.Delete();
+	textureFront.Delete();
+	textureBack.Delete();
 	shaderProgram.Delete();
 
 	//Close the window and end the rendering
